@@ -1,4 +1,4 @@
-# 🔍 Slither Demo: Static Analysis for Solidity Smart Contracts
+# 🔍 Slither Demo: Analisis estático para smart contracts
 
 Este proyecto es una demostración mínima del uso de **Slither**, una herramienta de análisis estático para contratos inteligentes en Solidity, integrada con el framework de desarrollo **Foundry**.
 
