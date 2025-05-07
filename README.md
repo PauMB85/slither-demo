@@ -1,66 +1,68 @@
-## Foundry
+# 🔍 Slither Demo: Static Analysis for Solidity Smart Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Este proyecto es una demostración mínima del uso de **Slither**, una herramienta de análisis estático para contratos inteligentes en Solidity, integrada con el framework de desarrollo **Foundry**.
 
-Foundry consists of:
+Incluye un contrato vulnerable intencionadamente para mostrar cómo Slither detecta errores de seguridad en diferentes niveles de criticidad.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+---
 
-## Documentation
+## Instalación
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+1. Clona este repositorio:
+```bash
+  git clone https://github.com/tuusuario/slither-demo.git
+  cd slither-demo
 ```
 
-### Test
-
-```shell
-$ forge test
+2. Opcional. Instalar Foundry
+```bash
+curl -L https://foundry.paradigm.xyz | bash
 ```
 
-### Format
+3. Opcional. Instala Slither:
+```bash
+brew install slither-analyzer
+```
+NOTA: existen otras formar de instarlo, aqui te dejo el link con sus opcones, https://github.com/crytic/slither?tab=readme-ov-file#how-to-install
 
-```shell
-$ forge fmt
+## Como analizar
+La forma más sencilla de poder analizar todo tu proyecto con Slither es ejecutarlo en el directorio raíz del proyecto:
+```bash
+slither.
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
+por otro lado, también lo puedes hacer analizando un contrato en particular:
+```bash
+slither src/VulnerableSlitherDemo.sol
 ```
 
-### Anvil
+Además, nos ofrece distintas formas para poderlo hacerlo mas fácil de leer, por ejemplo, podemos usar el comando
+```bash
+slither . --print human-summary
+```
+Obtieniendo un resumen más legible:
+```bash
+Compiled with Foundry
+Total number of contracts in source files: 1
+Source lines of code (SLOC) in source files: 17
+Number of  assembly lines: 0
+Number of optimization issues: 0
+Number of informational issues: 3
+Number of low issues: 0
+Number of medium issues: 1
+Number of high issues: 2
 
-```shell
-$ anvil
++-----------------------+-------------+------+------------+--------------+--------------+
+| Name                  | # functions | ERCS | ERC20 info | Complex code |     Features |
++-----------------------+-------------+------+------------+--------------+--------------+
+| VulnerableSlitherDemo |           3 |      |            |           No |  Receive ETH |
+|                       |             |      |            |              |     Send ETH |
+|                       |             |      |            |              | Selfdestruct |
++-----------------------+-------------+------+------------+--------------+--------------+
+INFO:Slither:. analyzed (1 contracts)
 ```
 
-### Deploy
+## Mas info:
+https://crytic.github.io/slither/slither.html
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
